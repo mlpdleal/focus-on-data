@@ -11,6 +11,7 @@ struct CheckoutView: View {
     
     @ObservedObject var order: Order
     
+    @State private var titleAlert = ""
     @State private var confirmationMessage = ""
     @State private var showingMessage = false
     
@@ -39,7 +40,7 @@ struct CheckoutView: View {
         }
         .navigationTitle("Check out")
         .navigationBarTitleDisplayMode(.inline)
-        .alert("Thank you!", isPresented: $showingMessage){
+        .alert(titleAlert, isPresented: $showingMessage){
             Button("OK"){}
             } message: {
                 Text(confirmationMessage)
@@ -62,10 +63,13 @@ struct CheckoutView: View {
             let (data, _) = try await URLSession.shared.upload(for: request, from: encoded)
             
             let decodedOrder = try JSONDecoder().decode(Order.self, from: data)
+            titleAlert = "Thank you!"
             confirmationMessage = "Your order for \(decodedOrder.quantity) x \(Order.types[decodedOrder.type].lowercased()) cupcakes is on its way!"
             showingMessage = true
         } catch {
-            print("Checkout failed")
+            titleAlert = "Sorry!"
+            confirmationMessage = "Checkout failed! Try again later!"
+            showingMessage = true
         }
     }
 }

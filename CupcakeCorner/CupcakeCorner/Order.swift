@@ -56,7 +56,7 @@ class Order: ObservableObject, Codable{
     }
     
     var hasValidAddress: Bool{
-        if name.isEmpty || streetAddress.isEmpty || city.isEmpty || zip.isEmpty{
+        if name.trimmingCharacters(in: .whitespaces).isEmpty || name.trimmingCharacters(in: .whitespaces).isEmpty || name.trimmingCharacters(in: .whitespaces).isEmpty || name.trimmingCharacters(in: .whitespaces).isEmpty{
             return false
         }
         
