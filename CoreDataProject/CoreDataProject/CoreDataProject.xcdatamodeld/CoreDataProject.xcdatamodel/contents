@@ -10,7 +10,12 @@
             </uniquenessConstraint>
         </uniquenessConstraints>
     </entity>
+    <entity name="Ship" representedClassName="Ship" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="universe" optional="YES" attributeType="String"/>
+    </entity>
     <elements>
         <element name="Movie" positionX="-63" positionY="-18" width="128" height="74"/>
+        <element name="Ship" positionX="-63" positionY="9" width="128" height="59"/>
     </elements>
 </model>
