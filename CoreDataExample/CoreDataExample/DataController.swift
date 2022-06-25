@@ -1,24 +1,26 @@
 //
 //  DataController.swift
-//  CoreDataProject1
+//  CoreDataExample
 //
-//  Created by Manoel Leal on 22/06/22.
+//  Created by Manoel Leal on 23/06/22.
 //
 
-import CoreData
 import Foundation
+import CoreData
 
 class DataController: ObservableObject{
-    let container = NSPersistentContainer(name: "CoreDataProject")
+    
+    let container = NSPersistentContainer(name: "CoreDataExample")
     
     init(){
         container.loadPersistentStores{ description, error in
             if let error = error {
-                print("Core Data failed \(error.localizedDescription)")
+                print("Core data Failed \(error.localizedDescription)")
                 return
             }
             
             self.container.viewContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
         }
     }
+    
 }

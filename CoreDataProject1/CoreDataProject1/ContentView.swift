@@ -10,12 +10,15 @@ import SwiftUI
 struct ContentView: View {
     
     @Environment(\.managedObjectContext) var moc
-    @State private var lastNameFilter = "A"
+    @State private var lastNameFilter = ""
+    
     
     var body: some View {
         VStack{
             
-            FilteredList(filterKey: lastNameFilter, filterValue: lastNameFilter) { (singer: Singer) in 
+            TextField("Search", text: $lastNameFilter)
+            
+            FilteredList(sortDescriptors: [], filterKey: "lastName", filterValue: lastNameFilter, predicate: .contains) { (singer: Singer) in
                 Text("\(singer.wrappedFirstName) \(singer.wrappedLastName)")
             }
             
@@ -48,6 +51,12 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        
+        ForEach(ColorScheme.allCases, id: \.self){
+            ContentView()
+                .preferredColorScheme($0)
+        }
+        
+            
     }
 }
